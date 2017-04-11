@@ -3,10 +3,16 @@ faceapp
 
 small package for faceapp
 
-original: ![alt original](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "original")
-smile: ![alt smile](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "smile")
-smile2: ![alt original](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "original")
-hot: ![alt hot](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "hot")
-old: ![alt old](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "old")
-female: ![alt female](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "female")
-male: ![alt male](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "male")
+original: ![alt original](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill.jpg "original")
+
+smile: ![alt smile](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_smile.jpg "smile")
+
+smile2: ![alt original](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_smile2.jpg "smile2")
+
+hot: ![alt hot](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_hot.jpg "hot")
+
+old: ![alt old](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_old.jpg "old")
+
+female: ![alt female](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_female.jpg "female")
+
+male: ![alt male](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_male.jpg "male")
