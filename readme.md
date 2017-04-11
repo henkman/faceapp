@@ -7,7 +7,7 @@ original: ![alt original](https://raw.githubusercontent.com/henkman/faceapp/mast
 
 smile: ![alt smile](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_smile.jpg "smile")
 
-smile2: ![alt smile2](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_smile2.jpg "smile_2")
+smile_2: ![alt smile_2](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_smile_2.jpg "smile_2")
 
 hot: ![alt hot](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_hot.jpg "hot")
 
