@@ -3,6 +3,55 @@ faceapp
 
 small package for faceapp
 
+```go
+import (
+	"os"
+	"github.com/henkman/faceapp"
+)
+
+func main() {
+	var s faceapp.Session
+	if err := s.Init(); err != nil {
+		panic(err)
+	}
+	var code string
+	{
+		fd, err := os.Open("test/bill.jpg")
+		if err != nil {
+			panic(err)
+		}
+		temp, err := s.UploadImage(fd)
+		fd.Close()
+		if err != nil {
+			panic(err)
+		}
+		code = temp
+	}
+	{
+		for _, fil := range []Filter{
+			FilterSmile,
+			FilterSmile2,
+			FilterHot,
+			FilterOld,
+			FilterYoung,
+			FilterFemale,
+			FilterMale,
+		} {
+			fd, err := os.OpenFile("test/bill_"+string(fil)+".jpg",
+				os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0750)
+			if err != nil {
+				panic(err)
+			}
+			if err := s.GetImage(fd, code, fil, false); err != nil {
+				fd.Close()
+				panic(err)
+			}
+			fd.Close()
+		}
+	}
+}
+```
+
 original: ![alt original](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill.jpg "original")
 
 smile: ![alt smile](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_smile.jpg "smile")
