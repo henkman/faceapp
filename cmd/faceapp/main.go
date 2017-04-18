@@ -19,7 +19,6 @@ var (
 		string(faceapp.FilterYoung),
 		string(faceapp.FilterFemale),
 		string(faceapp.FilterMale),
-		"all",
 	}
 )
 
@@ -34,17 +33,34 @@ func init() {
 	flag.Parse()
 }
 
+func removeDuplicatesUnordered(elements []string) []string {
+	encountered := map[string]bool{}
+	for v := range elements {
+		encountered[elements[v]] = true
+	}
+	result := []string{}
+	for key, _ := range encountered {
+		result = append(result, key)
+	}
+	return result
+}
+
 func main() {
 	filterstrings := strings.Split(_filters, ",")
-	filters := make([]faceapp.Filter, 0, len(filterstrings))
+	filters := make([]string, 0, len(filterstrings))
 	for _, s := range filterstrings {
 		s = strings.TrimSpace(s)
+		if s == "all" {
+			filters = VALID_FILTERS
+			break
+		}
 		for _, f := range VALID_FILTERS {
 			if s == f {
-				filters = append(filters, faceapp.Filter(s))
+				filters = append(filters, f)
 			}
 		}
 	}
+	filters = removeDuplicatesUnordered(filters)
 	if _in == "" || len(filters) == 0 {
 		flag.Usage()
 		return
@@ -76,7 +92,7 @@ func main() {
 			fmt.Println(err)
 			return
 		}
-		if err := sess.GetImage(fd, code, filter, false); err != nil {
+		if err := sess.GetImage(fd, code, faceapp.Filter(filter), false); err != nil {
 			fd.Close()
 			fmt.Println(err)
 			return
