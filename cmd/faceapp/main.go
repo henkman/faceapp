@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
+	"sync"
 
 	"github.com/henkman/faceapp"
 )
@@ -28,6 +30,7 @@ var (
 )
 
 func init() {
+	runtime.GOMAXPROCS(runtime.NumCPU())
 	flag.StringVar(&_in, "i", "", "jpg file input")
 	flag.StringVar(&_filters, "f", "all", strings.Join(VALID_FILTERS, "|"))
 	flag.Parse()
@@ -85,18 +88,24 @@ func main() {
 	file := filepath.Base(_in)
 	ext := filepath.Ext(file)
 	name := file[0 : len(file)-len(ext)]
-	for _, filter := range filters {
-		fd, err := os.OpenFile(filepath.Join(dir, name+"_"+string(filter)+".jpg"),
-			os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0750)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		if err := sess.GetImage(fd, code, faceapp.Filter(filter), false); err != nil {
+	var wg sync.WaitGroup
+	wg.Add(len(filters))
+	for i, _ := range filters {
+		go func() {
+			fd, err := os.OpenFile(filepath.Join(dir, name+"_"+filters[i]+".jpg"),
+				os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0750)
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+			if err := sess.GetImage(fd, code, faceapp.Filter(filters[i]), false); err != nil {
+				fd.Close()
+				fmt.Println(err)
+				return
+			}
 			fd.Close()
-			fmt.Println(err)
-			return
-		}
-		fd.Close()
+			wg.Done()
+		}()
 	}
+	wg.Wait()
 }

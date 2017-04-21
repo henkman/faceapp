@@ -5,6 +5,7 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"mime/multipart"
@@ -85,6 +86,9 @@ func (s *Session) UploadImage(in io.Reader) (string, error) {
 		return "", err
 	}
 	res.Body.Close()
+	if answer.Code == "" {
+		return "", errors.New("did not recognize image")
+	}
 	return answer.Code, nil
 }
 
