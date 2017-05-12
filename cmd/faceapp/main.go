@@ -91,21 +91,21 @@ func main() {
 	var wg sync.WaitGroup
 	wg.Add(len(filters))
 	for i, _ := range filters {
-		go func() {
-			fd, err := os.OpenFile(filepath.Join(dir, name+"_"+filters[i]+".jpg"),
+		go func(filter string) {
+			fd, err := os.OpenFile(filepath.Join(dir, name+"_"+filter+".jpg"),
 				os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0750)
 			if err != nil {
 				fmt.Println(err)
 				return
 			}
-			if err := sess.GetImage(fd, code, faceapp.Filter(filters[i]), false); err != nil {
+			if err := sess.GetImage(fd, code, faceapp.Filter(filter), false); err != nil {
 				fd.Close()
 				fmt.Println(err)
 				return
 			}
 			fd.Close()
 			wg.Done()
-		}()
+		}(filters[i])
 	}
 	wg.Wait()
 }
