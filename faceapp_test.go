@@ -32,6 +32,10 @@ func TestSimple(t *testing.T) {
 			FilterYoung,
 			FilterFemale,
 			FilterMale,
+			FilterBlack,
+			FilterCaucasian,
+			FilterAsian,
+			FilterIndian,
 		} {
 			fd, err := os.OpenFile("test/bill_"+string(fil)+".jpg",
 				os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0750)

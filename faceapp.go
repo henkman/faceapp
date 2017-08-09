@@ -14,19 +14,23 @@ import (
 )
 
 const (
-	ENDPOINT = "https://node-01.faceapp.io/api/v2.3"
+	ENDPOINT = "https://api.faceapp.io/api/v2.4"
 )
 
 type Filter string
 
 const (
-	FilterSmile  Filter = "smile"
-	FilterSmile2 Filter = "smile_2"
-	FilterHot    Filter = "hot"
-	FilterOld    Filter = "old"
-	FilterYoung  Filter = "young"
-	FilterFemale Filter = "female"
-	FilterMale   Filter = "male"
+	FilterSmile     Filter = "smile"
+	FilterSmile2    Filter = "smile_2"
+	FilterHot       Filter = "hot"
+	FilterOld       Filter = "old"
+	FilterYoung     Filter = "young"
+	FilterFemale    Filter = "female"
+	FilterMale      Filter = "male"
+	FilterBlack     Filter = "black"
+	FilterCaucasian Filter = "caucasian"
+	FilterAsian     Filter = "asian"
+	FilterIndian    Filter = "indian"
 )
 
 type Session struct {
@@ -39,8 +43,9 @@ func (s *Session) request(method, url string, body io.Reader) (*http.Request, er
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", "FaceApp/1.0.229 (Linux; Android 4.4)")
+	req.Header.Set("User-Agent", "FaceApp/1.0.290 (Linux; Android 4.5)")
 	req.Header.Set("X-FaceApp-DeviceID", s.appid)
+	req.Header.Set("X-FaceApp-Priority", "1")
 	return req, nil
 }
 
@@ -94,7 +99,9 @@ func (s *Session) UploadImage(in io.Reader) (string, error) {
 
 func (s *Session) GetImage(out io.Writer, code string, fil Filter, cropped bool) error {
 	url := fmt.Sprintf(ENDPOINT+"/photos/%s/filters/%s?cropped=", code, fil)
-	if cropped || fil == FilterMale || fil == FilterFemale {
+	if cropped || fil == FilterMale || fil == FilterFemale ||
+		fil == FilterBlack || fil == FilterCaucasian ||
+		fil == FilterAsian || fil == FilterIndian {
 		url += "1"
 	} else {
 		url += "0"
