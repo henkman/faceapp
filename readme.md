@@ -36,6 +36,10 @@ func main() {
 			FilterYoung,
 			FilterFemale,
 			FilterMale,
+			FilterBlack,
+			FilterCaucasian,
+			FilterAsian,
+			FilterIndian,
 		} {
 			fd, err := os.OpenFile("test/bill_"+string(fil)+".jpg",
 				os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0750)
@@ -65,3 +69,11 @@ old: ![alt old](https://raw.githubusercontent.com/henkman/faceapp/master/test/bi
 female: ![alt female](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_female.jpg "female")
 
 male: ![alt male](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_male.jpg "male")
+
+black: ![alt black](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_black.jpg "black")
+
+caucasian: ![alt caucasian](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_caucasian.jpg "caucasian")
+
+asian: ![alt asian](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_asian.jpg "asian")
+
+indian: ![alt indian](https://raw.githubusercontent.com/henkman/faceapp/master/test/bill_indian.jpg "indian")
