@@ -21,6 +21,10 @@ var (
 		string(faceapp.FilterYoung),
 		string(faceapp.FilterFemale),
 		string(faceapp.FilterMale),
+		string(faceapp.FilterBlack),
+		string(faceapp.FilterCaucasian),
+		string(faceapp.FilterAsian),
+		string(faceapp.FilterIndian),
 	}
 )
 
