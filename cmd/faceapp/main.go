@@ -21,10 +21,13 @@ var (
 		string(faceapp.FilterYoung),
 		string(faceapp.FilterFemale),
 		string(faceapp.FilterMale),
-		string(faceapp.FilterBlack),
-		string(faceapp.FilterCaucasian),
-		string(faceapp.FilterAsian),
-		string(faceapp.FilterIndian),
+		// string(faceapp.FilterBlack),
+		// string(faceapp.FilterCaucasian),
+		// string(faceapp.FilterAsian),
+		// string(faceapp.FilterIndian),
+		string(faceapp.FilterFemale2),
+		string(faceapp.FilterPan),
+		string(faceapp.FilterHitman),
 	}
 )
 
