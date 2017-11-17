@@ -11,6 +11,7 @@ import (
 	"mime/multipart"
 	"net/http"
 	"net/http/cookiejar"
+	"time"
 )
 
 const (
@@ -66,6 +67,7 @@ func (s *Session) Init() error {
 		return err
 	}
 	s.cli.Jar = jar
+	s.cli.Timeout = time.Second * 15
 	var temp [8]byte
 	if _, err := rand.Read(temp[:]); err != nil {
 		return err
